@@ -9,9 +9,11 @@
 </div>-->
 <div>
     @for(item of produtos;track item){
-        <div>
+    @if(mostrarProduto){
             <h3>{{item.nome | uppercase }}</h3>
-            <p>{{item.preco}}</p>
-        </div>
-    }
+        }
+        @if(mostrarPreco){
+            <p>{{item.preco | precoFormatado }}</p>
+        }
+        }
 </div>
