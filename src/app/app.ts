@@ -1,9 +1,9 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+//import { RouterOutlet } from '@angular/router'; //remove a importação de RouterOurtlet, pois não é necessário para este componente
+import {Produto} from './components/produto/produto' //importando a classe produto do arquivo app.ts
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [Produto],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
