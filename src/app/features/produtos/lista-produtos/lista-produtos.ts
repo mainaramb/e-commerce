@@ -34,9 +34,7 @@ export class ListaProdutos {
   //! Função que calcula o valor total dos produtos usando o método computed()
   valorTotal = computed(() =>
   {return this.produtos().reduce((total, item) =>
-  total + item.preco,0
-  )}
-  );
+  total + item.preco,0)});
   //! Função que substitui a lista atual usando o método set()
   substituirProdutos(){
     this.produtos.set([
@@ -63,4 +61,16 @@ export class ListaProdutos {
   }
   //! Método para criar um estado da seleção com signal string | null
   produtoSelecionado = signal <string | null>(null);
+  //! Método para criar um estado para carrinho com signal
+  carrinho = signal <{nome: string; preco: number}[]>([]);
+  adicionarAoCarrinho(produto:{nome: string; preco: number}){
+    this.carrinho.update(listaAtual => [...listaAtual, produto]
+    );
+  }
+//! Método para calcular a quantidade total de itens no carrinho
+quantidadeCarrinho = computed(() => this.carrinho().length);
+//! Método que calcula o valor total dos itens do carrinho
+totalCarrinho = computed (() => {
+  return this.carrinho().reduce((total, item) =>
+    total + item.preco,0)});
 }
