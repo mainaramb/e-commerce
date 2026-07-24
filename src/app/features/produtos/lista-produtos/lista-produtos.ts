@@ -5,6 +5,7 @@ import { computed } from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
@@ -12,11 +13,8 @@ import { UpperCasePipe } from '@angular/common';
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
-  produtos = signal ([
-    {nome:'Teclado Gamer', preco:229.99},
-    {nome:'Mouse Gamer', preco:129.99},
-    {nome:'Monitor Gamer', preco:2000}
-  ]);
+  produtos = signal<{nome: string; preco: number}[]>([]);                                         
+  carregando = signal (true);
   //! Função para exibir produtos selecionados pelo usuário no console
   exibirProduto(nome: string){
     console.log('Produto Selecionado:', nome);
@@ -45,8 +43,30 @@ export class ListaProdutos {
       {nome:'Headset', preco: 30 },
     ]);
   }
+// MÉTODO HTTP CLINT (API)
+  carregarProdutos(){
+    this.carregando.set(true);
+    this.http.get<{title: string; price: number}[]>
+    ('https://fakestoreapi.com/products').subscribe({
+      next: (dados) => {
+        const produtosFormatados = dados.map(p =>({
+          nome: p.title,
+          preco: p.price,
+        }));
+        this.produtos.set(produtosFormatados);
+        this.carregando.set(false);
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar produtos: ', erro);
+        this.carregando.set(false);
+      }
+    });
+  }
   //! Método para monitorar alterações em tempo real usando effect()
-  constructor(){
+  constructor(private http: HttpClient){
+    //!carrega a API
+    this.carregarProdutos();
+    //! effects continuam iguais - não mexer
     effect(() =>{
       console.log('Lista de Produtos Alterados: ', this.produtos());
     });
