@@ -5,7 +5,9 @@ import { computed } from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { produtosService } from '../produtos.service';
+import { inject } from '@angular/core';
+
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
@@ -20,6 +22,10 @@ export class ListaProdutos {
     console.log('Produto Selecionado:', nome);
     this.produtoSelecionado.set(nome);
   }
+// ===============INJECT ==========================
+  private produtosService = inject(produtosService);
+
+
   //! Função que adiciona produto usando update()
   adicionarProduto(){
     this.produtos.update(listaAtual => [
@@ -27,6 +33,7 @@ export class ListaProdutos {
       {nome:'Playstation 5', preco:3000},
     ]);
   }
+
   //! Função que contabiliza a quantidade de produtos na lista com método computed()
   totalProdutos = computed(() => this.produtos().length);
   //! Função que calcula o valor total dos produtos usando o método computed()
@@ -46,14 +53,10 @@ export class ListaProdutos {
 // MÉTODO HTTP CLINT (API)
   carregarProdutos(){
     this.carregando.set(true);
-    this.http.get<{title: string; price: number}[]>
-    ('https://fakestoreapi.com/products').subscribe({
+    this.produtosService.buscarProdutos().subscribe({
       next: (dados) => {
-        const produtosFormatados = dados.map(p =>({
-          nome: p.title,
-          preco: p.price,
-        }));
-        this.produtos.set(produtosFormatados);
+        const produtos = this.produtosService.transformarProdutos(dados);
+        this.produtos.set(produtos);
         this.carregando.set(false);
       },
       error: (erro) => {
@@ -61,9 +64,10 @@ export class ListaProdutos {
         this.carregando.set(false);
       }
     });
+
   }
   //! Método para monitorar alterações em tempo real usando effect()
-  constructor(private http: HttpClient){
+  constructor(){
     //!carrega a API
     this.carregarProdutos();
     //! effects continuam iguais - não mexer
@@ -93,4 +97,5 @@ quantidadeCarrinho = computed(() => this.carrinho().length);
 totalCarrinho = computed (() => {
   return this.carrinho().reduce((total, item) =>
     total + item.preco,0)});
+
 }
