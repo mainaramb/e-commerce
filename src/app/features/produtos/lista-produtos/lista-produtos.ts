@@ -17,6 +17,7 @@ import { inject } from '@angular/core';
 export class ListaProdutos {
   produtos = signal<{nome: string; preco: number}[]>([]);                                         
   carregando = signal (true);
+  erro = signal <string | null>(null);
   //! Função para exibir produtos selecionados pelo usuário no console
   exibirProduto(nome: string){
     console.log('Produto Selecionado:', nome);
@@ -52,7 +53,8 @@ export class ListaProdutos {
   }
 // MÉTODO HTTP CLINT (API)
   carregarProdutos(){
-    this.carregando.set(true);
+    this.erro.set(null); // limpa o erro antes de fazer requisição
+    this.carregando.set(true); // ativar o sinal de carregando
     this.produtosService.buscarProdutos().subscribe({
       next: (dados) => {
         const produtos = this.produtosService.transformarProdutos(dados);
@@ -61,6 +63,7 @@ export class ListaProdutos {
       },
       error: (erro) => {
         console.error('Erro ao carregar produtos: ', erro);
+        this.erro.set('Erro ao carregar produtos. Por favor, tente novamente!');
         this.carregando.set(false);
       }
     });
