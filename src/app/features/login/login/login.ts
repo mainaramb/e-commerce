@@ -29,11 +29,11 @@ export class Login {
       return;
     }
     const email = this.formulario.value.email ?? '';
-    const senha = this.formulario.value.email ?? '';
+    const senha = this.formulario.value.senha ?? '';
 
-    const loginfinalizado = this.authService.login(email, senha);
+    const loginFinalizado = this.authService.login(email, senha);
 
-    if(!loginfinalizado){
+    if(!loginFinalizado){
       this.erroLogin.set(true);
       return;
     }
