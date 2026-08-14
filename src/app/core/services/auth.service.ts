@@ -1,11 +1,11 @@
 import { Injectable, signal, computed } from "@angular/core";
 
-type PerfilUsuario = 'usuario' | 'admin';
+type PerfilUsuario = 'usuario';
 
 type Usuario ={
     email: string;
     perfil: PerfilUsuario;
-}
+};
 @Injectable({
     providedIn: 'root'
 })
