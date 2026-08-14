@@ -6,7 +6,7 @@
 }
 
 <form [formGroup]="formulario">
-    <p><input type="email" placeholder="E-mail"></p>
+    <p><input type="email" formControlName="email" placeholder="E-mail"></p>
     @if(formulario.get('email')?.touched && formulario.get('email')?.invalid){
         @if(formulario.get('email')?.errors?.['required']){
             <small style="color: red;">E-MAIL É OBRIGATÓRIO!</small>
@@ -16,7 +16,7 @@
         <small style="color: red;">E-MAIL INVÁLIDO</small>
     }
 
-    <p><input type="password" placeholder="Senha"></p>
+    <p><input type="password" formControlName="senha" placeholder="Senha"></p>
     @if(formulario.get('senha')?.touched && formulario.get('senha')?.invalid){
      @if(formulario.get('senha')?.errors?.['required']){
             <small style="color: red;">SENHA É OBRIGATÓRIA!</small>
