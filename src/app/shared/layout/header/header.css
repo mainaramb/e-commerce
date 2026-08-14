@@ -10,3 +10,8 @@ flex-wrap: wrap;
 button{
     margin-left: 8px;
 }
+
+.email-usuario{
+    font: 16px;
+    color:darkgreen;
+}
