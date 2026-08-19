@@ -1,5 +1,6 @@
 .acesso-negado{
-    max-width: 600px;
+    max-width: 100%;
+    text-align: center;
 }
 .acesso-negado p{
     line-height: 1.5;
