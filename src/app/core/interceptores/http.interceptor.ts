@@ -3,15 +3,15 @@ import { tap } from "rxjs";
 import { catchError } from "rxjs";
 import { throwError } from "rxjs";
 import { inject } from "@angular/core";
-import { AuthService } from "../services/auth.service";
+import { AuthFacade } from "../facades/auth.facade"; 
 import { Router } from "@angular/router";
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
     console.log('Requisição: ', req.url);
     //! Adiciona lógica para modificar a requisião
-    const authService = inject(AuthService);
+    const authFacade = inject(AuthFacade);
     const router = inject(Router);
-    const token = authService.obterToken();
+    const token = authFacade.obterToken();
 
     const novaReq = token ?
     req.clone({
@@ -28,7 +28,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
             console.error('ERRO GLOBAL:', error);
             if (error.status === 401){
                 console.warn('Erro de autenticação de Usuário:', error);
-                authService.logout();
+                authFacade.sair();
                 router.navigateByUrl('/login');
         }
 

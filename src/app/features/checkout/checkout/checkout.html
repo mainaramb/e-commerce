@@ -9,10 +9,10 @@
     <section>
         <h3>Resumo da compra</h3>
     </section>
-    @for(item of carrinhoFacade.itens(); track $index){
+    @for(item of carrinhoFacade.itensCarrinho(); track $index){
         <p>{{item.nome}} - R$ {{item.preco.toFixed(2)}}</p>
     }
-    <h4>Total: R$ {{carrinhoFacade.totalItens() | precoFormatado }}</h4>
+    <h4>Total: R$ {{carrinhoFacade.totalCarrinho() | precoFormatado }}</h4>
 }
 <form [formGroup]="formulario">
     <p><input type="text" formControlName="nome" placeholder="Digite seu nome"></p>
