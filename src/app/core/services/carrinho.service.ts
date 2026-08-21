@@ -15,7 +15,7 @@ quantidadeItens = computed(() => this.carrinho().length);
 totalItens = computed(() => this.carrinho().reduce((total, item) => total + item.preco,0));
 carrinhoVazio = computed(() => this.carrinho().length === 0);
 //TODO: Ações Adicionar Produtos
-adicionar(produto:ItemCarrinho){
+adicionar(produto:{nome: string, preco: number}){
     this.carrinho.update(lista => [...lista, produto]);
 }
 //TODO: Ações de limpeza
