@@ -38,7 +38,7 @@ export class Checkout {
     }
     const dados = this.formulario.value;
     const itens = this.carrinhoFacade.itensCarrinho();
-    const total = this.carrinhoFacade.itensCarrinho();
+    const total = this.carrinhoFacade.totalCarrinho();
 
     console.log('Compra finalizada com sucesso!');
     console.log('Dados do Formulário: ', dados);
