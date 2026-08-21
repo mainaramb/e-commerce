@@ -3,10 +3,11 @@ import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade'; 
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule,  PrecoFormatadoPipe],
+  imports: [ReactiveFormsModule,  PrecoFormatadoPipe, RouterLink],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
