@@ -12,7 +12,7 @@
                     <div class="item">
                         <p><strong>{{item.nome}}</strong></p>
                         <p>{{item.preco | precoFormatado }}</p>
-                        <button mat-stroked-button color="warn" type="button" click="removerItem(rmvItem: $index)">Remover</button>
+                        <button mat-stroked-button color="warn" type="button" (click)="removerItem($index)">Remover</button>
                     </div>
 
                 </article>
@@ -28,7 +28,7 @@
         <section class="acoes-carrinho">
             <button mat-raised-button color="primary" type="button" (click)="limparCarrinho()">Limpar Carrinho</button>
             <button mat-raised-button color="primary" type="button" routerLink="/produtos">Ver produtos</button>
-            <button mat-raised-button class="btn-confirmar" type="button" routerlink="/chekout">Finalizar compra</button>
+            <button mat-raised-button class="btn-confirmar" type="button" routerLink="/checkout">Finalizar compra</button>
             <button mat-raised-button class="btn-cancelar" type="button" (click)="cancelarCompra()">Cancelar compra</button>
 
         </section>
