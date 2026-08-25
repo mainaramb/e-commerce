@@ -1,4 +1,5 @@
-<h2>Checkout</h2>
+<section class="pagina-checkout">
+    <h2>Checkout</h2>
 @if(pedidoFinalizado()){
 <section class="pedido-finalizado">
     <h3>PEDIDO FINALIZADO COM SUCESSO</h3>
@@ -25,8 +26,8 @@
     <section class="compra-resumo">
         <h3>Resumo da compra</h3>
 
-        <p><strong>Itens do carrinho: </strong>{{carrinhoFacade.quantidadeCarrinho()}}</p>
-        <p><strong>Total: </strong>{{carrinhoFacade.totalCarrinho() | precoFormatado}}</p>
+        <p>Itens do carrinho: {{carrinhoFacade.quantidadeCarrinho()}}</p>
+        <p>Total: {{carrinhoFacade.totalCarrinho() | precoFormatado}}</p>
         <button mat-raised-button color="primary" type="button"
         routerLink="/carrinho">Revisar carrinho</button>
     </section>
@@ -69,3 +70,4 @@
 </p>
 </form>
 <hr>
+</section>
