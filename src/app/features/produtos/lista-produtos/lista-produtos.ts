@@ -8,15 +8,16 @@ import { produtosService } from '../../../core/services/produtos.service';
 import { inject } from '@angular/core';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';  
 import { ItemCarrinho } from '../../../core/models/item-carrinho';
-
+import { RouterLink } from '@angular/router';
+import { ProdutoLoja } from '../../../core/models/produto-loja';
 @Component({
   selector: 'app-lista-produtos',
-  imports: [Produto, PrecoFormatadoPipe, UpperCasePipe],
+  imports: [Produto, PrecoFormatadoPipe, UpperCasePipe, RouterLink],
   templateUrl: './lista-produtos.html',
   styleUrl: './lista-produtos.css',
 })
 export class ListaProdutos {
-  produtos = signal<{nome: string; preco: number}[]>([]);                                         
+  produtos = signal<ProdutoLoja[]>([]);                                         
   carregando = signal (true);
   erro = signal <string | null>(null);
   //! Função para exibir produtos selecionados pelo usuário no console
@@ -46,6 +47,9 @@ export class ListaProdutos {
   valorTotal = computed(() =>
   {return this.produtos().reduce((total, item) =>
   total + item.preco,0)});
+
+  valorTotalFormatado = computed(()=> this.valorTotal().toFixed(2));
+
   //! Função que substitui a lista atual usando o método set()
   substituirProdutos(){
     this.produtos.set([
@@ -78,13 +82,7 @@ export class ListaProdutos {
   constructor(){
     //!carrega a API
     this.carregarProdutos();
-    //! effects continuam iguais - não mexer
-    effect(() =>{
-      console.log('Lista de Produtos Alterados: ', this.produtos());
-    });
-    effect(() =>{
-      console.log('Valor Total Atualizado: ', this.valorTotal());
-    });
+
     effect(() =>{
       if (typeof document !== 'undefined'){
         document.title = `(${this.totalProdutos()}) - Loja da Mainara`
