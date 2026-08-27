@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Injectable, computed, signal, inject, PLATFORM_ID } from '@angular/core';
 
-type PerfilUsuario = 'usuario' | 'admin';
+type PerfilUsuario = 'usuario' | 'admin' ;
 
 type Usuario = {
   email: string;
