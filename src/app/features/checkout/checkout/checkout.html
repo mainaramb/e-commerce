@@ -28,7 +28,7 @@
 
         <p>Itens do carrinho: {{carrinhoFacade.quantidadeCarrinho()}}</p>
         <p>Total: {{carrinhoFacade.totalCarrinho() | precoFormatado}}</p>
-        <button mat-raised-button color="primary" type="button"
+        <button mat-stroked-button color="primary" type="button"
         routerLink="/carrinho">Revisar carrinho</button>
     </section>
 }
@@ -66,7 +66,7 @@
         <small style="color: red;">ENDEREÇO INVÁLIDO</small>
      }
 <p>
-    <button type="button" (click)="finalizar()" [disabled]="formulario.invalid">Finalizar Compra</button>
+    <button mat-raised-button color="primary" type="button" (click)="finalizar()" [disabled]="formulario.invalid">Finalizar Compra</button>
 </p>
 </form>
 <hr>
