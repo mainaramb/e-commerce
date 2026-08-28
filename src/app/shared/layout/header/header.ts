@@ -5,6 +5,7 @@ import { RouterLink, Router } from '@angular/router';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
 import { inject } from '@angular/core';
 import { AuthFacade } from '../../../core/facades/auth.facade';
+import { FavoritosService } from '../../../core/services/favoritos.service';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,9 @@ export class Header {
   private authFacade = inject(AuthFacade);
   usuarioLogado =this.authFacade.usuarioLogado;
   usuarioAtual = this.authFacade.usuarioAtual;
+
+  private favoritosService = inject(FavoritosService);
+  quantidadeFavoritos = this.favoritosService.quantidadeFavoritos;
 
   private router = inject(Router);
 
