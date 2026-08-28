@@ -7,6 +7,7 @@ export class FavoritosService {
   private platformId = inject(PLATFORM_ID);
   private readonly chaveStorage = 'minha-loja-favoritos';
   readonly favoritos = signal<string[]>([]);
+  public quantidadeFavoritos = computed(() => this.favoritos().length);
 
 
   adicionar(produto: string) {
