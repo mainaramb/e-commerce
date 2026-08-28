@@ -8,7 +8,7 @@
     }@else{
         <section class="lista-favoritos">
             @for(item of favoritos(); track item){
-                <article class="item-carrinho">
+                <article class="item-favoritos">
                     <div class="item">
                         <p><strong>{{item}}</strong></p>
                         <button mat-raised-button color="primary" type="button" (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho</button>
