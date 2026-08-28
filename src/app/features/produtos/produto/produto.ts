@@ -1,9 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, output } from '@angular/core';
 import { UpperCasePipe, CurrencyPipe } from '@angular/common';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ItemCarrinho } from '../../../core/models/item-carrinho';
+import { FavoritosService } from '../../../core/services/favoritos.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-produto',
   imports: [UpperCasePipe, PrecoFormatadoPipe, MatButtonModule, MatCardModule],
@@ -28,5 +30,9 @@ adicionarAoCarrinho() {
     nome:this.nome,
     preco:this.preco,
   });
+}
+@Output() produtoFavoritado = new EventEmitter<string>()
+adicionarFavoritos() {
+  this.produtoFavoritado.emit(this.nome);
 }
 }
