@@ -12,7 +12,7 @@ import { AuthFacade } from "../../../../core/facades/auth.facade";
     templateUrl: './favoritos.html',
     styleUrl: './favoritos.css',
 })
-export class favoritosComponent {
+export class Favoritos {
     private router =inject(Router);
     public carrinhoFacade =inject(CarrinhoFacade);
     private authFacade =inject(AuthFacade);
@@ -24,5 +24,11 @@ export class favoritosComponent {
  }
  limparFavoritos(){
   this.favoritosService.limpar();
+ }
+ adicionarAoCarrinho(nomeProduto:string){
+    this.carrinhoFacade.adicionarProdutoCarrinho({
+        nome: nomeProduto,
+        preco: 0
+    });
  }
 }
