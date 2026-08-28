@@ -49,6 +49,7 @@
         [preco]="item.preco"
         (produtoSelecionado)="exibirProduto($event)"
         (produtoAdicionado)="adicionarAoCarrinho($event)"
+        (produtoFavoritado)="aoFavoritar($event)"
         >
         </app-produto>
     }
