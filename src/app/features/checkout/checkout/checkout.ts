@@ -5,10 +5,10 @@ import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { RouterLink } from '@angular/router';
 import { PedidoFinalizado } from '../../../core/models/pedido-finalizado';
-
+import { MatButtonModule } from '@angular/material/button';
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule,  PrecoFormatadoPipe, RouterLink],
+  imports: [ReactiveFormsModule,  PrecoFormatadoPipe, RouterLink, MatButtonModule],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
