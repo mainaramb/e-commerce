@@ -41,6 +41,10 @@ export const routes: Routes = [
         loadComponent: () => import ('./features/acesso-negado/acesso-negado/acesso-negado').then((m) => m.AcessoNegado)
     },
     {
+        path: 'favoritos',
+        loadComponent: () => import ('./features/produtos/favoritos/favoritos/favoritos').then((m) => m.Favoritos),
+    },
+    {
         path:'**',
         redirectTo: '',
     },
