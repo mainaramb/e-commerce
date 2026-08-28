@@ -2,15 +2,16 @@
 
     <h2>Favoritos</h2>
     @if(favoritos().length === 0){
-        <p>Favoritos está vazio</p>
+        <p>Nenhum produto favorito adicionado</p>
         <button mat-raised-button color="primary" type="button" routerLink="/produtos">Ver produtos</button>
 
     }@else{
         <section class="lista-favoritos">
-            @for(item of favoritos(); track $index){
+            @for(item of favoritos(); track item){
                 <article class="item-carrinho">
                     <div class="item">
                         <p><strong>{{item}}</strong></p>
+                        <button mat-raised-button color="primary" type="button" (click)="adicionarAoCarrinho(item)">Adicionar ao Carrinho</button>
                         <button mat-stroked-button color="warn" type="button" (click)="removerItem($index)">Remover</button>
                     </div>
 
@@ -21,7 +22,8 @@
     
         <section class="acoes-favoritos">
             <button mat-raised-button color="primary" type="button" (click)="limparFavoritos()">Limpar Favoritos</button>
-            <button mat-raised-button color="primary" type="button" routerLink="/produtos">Ver Favoritos</button>
+            <button mat-raised-button color="primary" type="button" routerLink="/produtos">Ver Produtos</button>
+            <button mat-raised-button color="primary" type="button" routerLink="/carrinho">Ver Carrinho</button>
 
         </section>
     }
