@@ -10,6 +10,7 @@ import { CarrinhoFacade } from '../../../core/facades/carrinho.facade';
 import { ItemCarrinho } from '../../../core/models/item-carrinho';
 import { RouterLink } from '@angular/router';
 import { ProdutoLoja } from '../../../core/models/produto-loja';
+import { FavoritosService } from '../../../core/services/favoritos.service';
 @Component({
   selector: 'app-lista-produtos',
   imports: [Produto, PrecoFormatadoPipe, UpperCasePipe, RouterLink],
@@ -28,6 +29,7 @@ export class ListaProdutos {
 // ===============INJECT ==========================
   private produtosService = inject(produtosService);
   public carrinhoFacade = inject(CarrinhoFacade);
+  private favoritosService = inject(FavoritosService);
 
   quantidadeCarrinho = this.carrinhoFacade.quantidadeCarrinho;
   totalCarrinho = this.carrinhoFacade.totalCarrinho;
@@ -95,5 +97,9 @@ export class ListaProdutos {
  
   adicionarAoCarrinho(produto: ItemCarrinho){
     this.carrinhoFacade.adicionarProdutoCarrinho(produto);
+  }
+
+  aoFavoritar(nomeProduto: string) {
+    this.favoritosService.adicionar(nomeProduto);
   }
 }
