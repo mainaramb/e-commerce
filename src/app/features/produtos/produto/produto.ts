@@ -4,11 +4,12 @@ import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { ItemCarrinho } from '../../../core/models/item-carrinho';
+import {MatIconModule} from '@angular/material/icon';
 import { FavoritosService } from '../../../core/services/favoritos.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-produto',
-  imports: [UpperCasePipe, PrecoFormatadoPipe, MatButtonModule, MatCardModule],
+  imports: [UpperCasePipe, PrecoFormatadoPipe, MatButtonModule, MatCardModule, MatIconModule],
   templateUrl: './produto.html',
   styleUrl: './produto.css',
 })
