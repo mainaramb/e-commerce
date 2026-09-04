@@ -6,6 +6,8 @@ import { Router } from "@angular/router";
 import { FavoritosService } from "../../../../core/services/favoritos.service";
 import { CarrinhoFacade } from "../../../../core/facades/carrinho.facade";
 import { AuthFacade } from "../../../../core/facades/auth.facade";
+import { FavoritosFacade } from "../../../../core/facades/favoritos.facade";
+import { ItemCarrinho } from "../../../../core/models/item-carrinho";
 @Component ({
     selector: 'app-favoritos',
     imports: [RouterLink, MatButtonModule, PrecoFormatadoPipe ],
@@ -15,20 +17,20 @@ import { AuthFacade } from "../../../../core/facades/auth.facade";
 export class Favoritos {
     private router =inject(Router);
     public carrinhoFacade =inject(CarrinhoFacade);
-    private authFacade =inject(AuthFacade);
-    private favoritosService =inject(FavoritosService);
-    public favoritos = this.favoritosService.favoritos;
+    private favoritosFacade =inject(FavoritosFacade);
+
+    favoritos = this.favoritosFacade.itensFavoritos;
+    quantidade = this.favoritosFacade.quantidadeFavoritos;
+    vazio =this.favoritosFacade.favoritoVazio;
+
 
  removerItem(rmvItem:number){
-  this.favoritosService.removerItem(rmvItem);
+  this.favoritosFacade.removerItem(rmvItem);
  }
  limparFavoritos(){
-  this.favoritosService.limpar();
+  this.favoritosFacade.limpar();
  }
- adicionarAoCarrinho(nomeProduto:string){
-    this.carrinhoFacade.adicionarProdutoCarrinho({
-        nome: nomeProduto,
-        preco: 0
-    });
+ adicionarAoCarrinho(item:ItemCarrinho){
+    this.carrinhoFacade.adicionarProdutoCarrinho(item);
  }
 }
